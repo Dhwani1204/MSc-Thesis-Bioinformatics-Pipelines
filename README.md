@@ -10,7 +10,6 @@ Galanin receptors play complex, context-dependent roles in oncogenesis. This pro
 ## 🛠️ Technical Stack & Implementation
 The computational framework seamlessly bridges wet-lab domain context with robust dry-lab engineering:
 * **Python Pipelines:** Utilized for survival analysis using `lifelines` (Cox proportional hazards modeling), data manipulations via `Pandas` and `NumPy`, multiple testing corrections with `statsmodels`, and custom plotting with `matplotlib`.
-* **R Packages:** Employed for core differential expression analytics (`edgeR`), gene annotation mappings (`org.Hs.eg.db`), and multi-category data visualizations (`ggplot2`, `pheatmap`).
 * **OS Environment:** Executed entirely inside a native `Linux / Bash` terminal environment to manage and preprocess heavy genomic data matrices.
 
 ## 📊 Detailed Pipeline Framework
@@ -20,12 +19,12 @@ The computational framework seamlessly bridges wet-lab domain context with robus
 * Computed **univariate Cox proportional hazard regressions** mapping overall survival time (`OS.time`) and status (`OS`).
 * Performed median-stratification to isolate high vs. low expression cohorts, applying a global **Benjamini-Hochberg FDR** correction across all gene-cancer combinations.
 
-### 2. Immune Infiltration & TME Analysis (`Python / R`)
+### 2. Immune Infiltration & EMT Analysis (`Python`)
 * Procured the `HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION` gene set from MSigDB to measure individual sample **EMT Z-scores**.
 * Merged multi-algorithm immune deconvolution metrics (from TIMER, CIBERSORT, EPIC, xCELL, etc.) using TCGA barcodes.
 * Employed **partial Spearman correlation** backed by **Ordinary Least Squares (OLS) regression** to completely control and regress out the confounding effects of tumor purity.
 
-### 3. Competitive Endogenous RNA (ceRNA) Network Construction (`R / Python`)
+### 3. Competitive Endogenous RNA (ceRNA) Network Construction (`Python`)
 * **miRNA-Target Prediction:** Integrated downstream miRNA expression data with matching TCGA clinical matrices. Utilized target prediction algorithms (such as *TargetScan / miRDB / miRTarBase*) to map potential upstream miRNAs binding to GALR1, GALR2, and GALR3.
 * **lncRNA Sponging Activity:** Identified corresponding Long Non-Coding RNAs (lncRNAs) sharing identical miRNA response elements (MREs) with GALR transcripts to isolate potential competitive sponging mechanisms.
 * **Network Crosstalk Modeling:** Calculated negative Spearman correlation values for lncRNA-miRNA pairs and positive correlation values for lncRNA-mRNA pairs to validate true ceRNA behavior (where lncRNA expression rescues GALR transcripts from miRNA-mediated degradation).
@@ -34,7 +33,5 @@ The computational framework seamlessly bridges wet-lab domain context with robus
 
 ## 📂 Repository Layout
 * `/Python_Scripts/` — Scripts containing the `coxPHFitter` loop, FDR calculations, and forest plot generators.
-* `/R_Scripts/` — Code for `edgeR` normalization, multi-omics annotations, stacked bar charts, and `pheatmap` configurations.
-* `/Sample_Data/` — Formatted dummy data formats to test pipeline integrity locally.
 
 *Note: Raw TCGA/DepMap/TIMER data matrices are publicly accessible via their respective portals and are not hosted directly within this repository to preserve data compliance.*
