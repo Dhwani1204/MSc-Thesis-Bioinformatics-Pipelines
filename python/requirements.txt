@@ -1,0 +1,8 @@
+pandas
+numpy
+scipy
+statsmodels
+seaborn
+matplotlib
+networkx
+lifelines
